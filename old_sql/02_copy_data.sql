@@ -1,0 +1,10 @@
+COPY public.mock_data FROM '/data/MOCK_DATA_0.csv' WITH (FORMAT csv, HEADER true);
+COPY public.mock_data FROM '/data/MOCK_DATA_1.csv' WITH (FORMAT csv, HEADER true);
+COPY public.mock_data FROM '/data/MOCK_DATA_2.csv' WITH (FORMAT csv, HEADER true);
+COPY public.mock_data FROM '/data/MOCK_DATA_3.csv' WITH (FORMAT csv, HEADER true);
+COPY public.mock_data FROM '/data/MOCK_DATA_4.csv' WITH (FORMAT csv, HEADER true);
+COPY public.mock_data FROM '/data/MOCK_DATA_5.csv' WITH (FORMAT csv, HEADER true);
+COPY public.mock_data FROM '/data/MOCK_DATA_6.csv' WITH (FORMAT csv, HEADER true);
+COPY public.mock_data FROM '/data/MOCK_DATA_7.csv' WITH (FORMAT csv, HEADER true);
+COPY public.mock_data FROM '/data/MOCK_DATA_8.csv' WITH (FORMAT csv, HEADER true);
+COPY public.mock_data FROM '/data/MOCK_DATA_9.csv' WITH (FORMAT csv, HEADER true);

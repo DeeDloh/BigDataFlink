@@ -1,3 +1,97 @@
+# Highload Lab 3 — Flink Streaming
+
+Лабораторная реализует потоковую обработку данных:
+
+CSV → Producer → Kafka → Flink → PostgreSQL
+
+Flink читает JSON-сообщения из Kafka, преобразует данные в модель "звезда" и записывает результат в PostgreSQL.
+
+## Запуск
+
+Сначала полностью очищаем старые контейнеры и данные:
+
+```bash
+docker compose down -v
+````
+
+Запускаем PostgreSQL, Kafka и создание Kafka-топика:
+
+```bash
+docker compose up -d --build postgres kafka kafka-init
+```
+
+Проверяем, что топик создался:
+
+```bash
+docker compose logs kafka-init
+```
+
+В логах должен быть топик:
+
+```text
+mock-data
+```
+
+Запускаем Flink:
+
+```bash
+docker compose up -d --build flink-jobmanager flink-taskmanager flink-submit
+```
+
+После этого запускаем producer, который отправит CSV-данные в Kafka:
+
+```bash
+docker compose up --build producer
+```
+
+## Проверка
+
+Запустить проверочные SQL-запросы:
+
+```bash
+docker compose exec -T postgres psql -U postgres -d lab3 < queries/checks.sql
+```
+
+Ожидаемый результат:
+
+```text
+dim_customers | 10000
+dim_sellers   | 10000
+dim_products  | 10000
+dim_stores    | 10000
+dim_suppliers | 10000
+dim_dates     | 364
+fact_sales    | 10000
+```
+
+Также можно зайти в Flink UI:
+
+```text
+http://localhost:8081
+```
+
+PostgreSQL доступен на порту:
+
+```text
+localhost:5433
+```
+
+Данные для подключения:
+
+```text
+database: lab3
+user: postgres
+password: postgres
+```
+
+## Остановка
+
+```bash
+docker compose down
+```
+
+
+
 # BigDataFlink
 Анализ больших данных - лабораторная работа №3 - Streaming processing с помощью Flink
 
